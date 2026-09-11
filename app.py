@@ -36,22 +36,25 @@ def add_user():
         #Read    LEER
         #Update  ACTUALIZAR
         #Delete  ELIMINAR
+@app.route('/edit/<int:id>', methods=['POST','GET'])
 def edit_user(id):
     if request.method== 'POST':
         name=request.form['name']
         email=request.form['email']
         cur=mysql.connection.cursor()
-        cur.execute("UPDATE user SET name=%s, email=%s WHERE id=%s",(name,email,))
+        
+        #se agrega WHERE id=%s para que solo se actualice y oincida con la tabla (name, email, id)
+        cur.execute("UPDATE user SET name=%s, email=%s WHERE id=%s",(name,email,id))
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('index')) 
     else:
          cur=mysql.connection.cursor()
          cur.execute("SELECT * FROM user WHERE id=%s",(id,))#EJECUTA LA CONSULTA DE MYSQL
-         data=cur.fetchall() #RECUPERAMOS LA INFORMACION DE MYSQL
+         data=cur.fetchone() #RECUPERAMOS LA INFORMACION DE MYSQL
          cur.close()
          return render_template('edit.html', user=data)
      
      
-if__name__=='__main__':
+if __name__=='__main__':
     app.run(debug=True)
