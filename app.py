@@ -24,14 +24,16 @@ def index():
    
 @app.route("/add", methods=['POST'])
 def add_user():
-    if request.method== 'POST':
-        name=request.form['name']
-        email=request.form['email']
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
         
-        cur=mysql.connection.cursor()
-        cur.execute("INSERT INTO user (name,email) VALUES (%s,%s)",(name,email))
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO user (name,email) VALUES (%s,%s)", (name,email))
+        mysql.connection.commit()  # <--- AGREGA ESTA LÍNEA AQUÍ
         cur.close()
         return redirect(url_for('index'))
+
         #Create  CREAR
         #Read    LEER
         #Update  ACTUALIZAR

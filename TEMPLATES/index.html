@@ -34,16 +34,20 @@
   </thead>
   <tbody>
     {% for u in user %}
-    <tr>
-    <th scope="row">{{u[0]}}</th> 
-      <td>{{u[1]}}</td>
-      <td>{{u[2]}}</td>
-      <td>
-        <a href="/edit/{{u[0]}}" class="btn btn-outline-success">EDITAR</a>
-        <a href="/delete/{{u[0]}}" class="btn btn-outline-danger">ELIMINAR</a>
-      </td>
-    </tr>
-    {% endfor %}
+<tr>
+    <td>{{ u[0] }}</td> <!-- ID -->
+    <td>{{ u[1] }}</td> <!-- Nombre -->
+    <td>{{ u[2] }}</td> <!-- Correo -->
+    <td>
+        <!-- BOTÓN PARA EDITAR (Llama a tu ruta /edit/id) -->
+        <a href="/edit/{{ u[0] }}" class="btn btn-warning btn-sm">Editar</a>
+        
+        <!-- BOTÓN PARA ELIMINAR (Llama a tu ruta /delete/id) -->
+        <a href="/delete/{{ u[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar?')">Eliminar</a>
+    </td>
+</tr>
+{% endfor %}
+
   </tbody>
 </table>
 </table>
