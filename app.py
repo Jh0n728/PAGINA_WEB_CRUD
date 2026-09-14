@@ -54,6 +54,13 @@ def edit_user(id):
          data=cur.fetchone() #RECUPERAMOS LA INFORMACION DE MYSQL
          cur.close()
          return render_template('edit.html', user=data)
+@app.route('/delete/<int:id>')
+def delete_user(id):
+    cur=mysql.connection.cursor() # CREAMOS UNA VARIABLE QUE TENAGA LA CONECCION A LA BD
+    cur.execute("DELETE FROM user WHERE id=%s",(id,)) #DELETE (ELIMINAR)
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('index'))
      
      
 if __name__=='__main__':
