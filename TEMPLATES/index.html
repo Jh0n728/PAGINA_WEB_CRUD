@@ -14,17 +14,17 @@
  <form action="/add" method="POST">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">INGRESE SU NOMBRE</label>
-    <input type="text" class="form-control" name="name" placeholder="ingrese su nombre">
+    <input type="text" class="form-control" name="name" placeholder="ingrese su nombre" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">CORREO ELECTRONICO</label>
-    <input type="email" class="form-control" name="email" placeholder="Ingrese su correo electrónico">
+    <input type="email" class="form-control" name="email" placeholder="Ingrese su correo electrónico" required>
 
   <button type="submit" class="btn btn-primary">REGISTRARSE</button>
 
 </form>
 
-<h1>LISTA DE USUARIOS</h1>
+<h1>BÚSQUEDA DE USUARIOS</h1>
 <form action="/search" method="GET" class="d-flex">
   <input type="text" name="q" class="form-control me-2" placeholder="Buscar..." value="{{ busqueda or '' }}">
   <button type="submit" class="btn btn-outline-success">Buscar</button>
@@ -50,7 +50,7 @@
         <a href="/edit/{{ u[0] }}" class="btn btn-warning btn-sm">Editar</a>
         
         <!-- BOTÓN PARA ELIMINAR (Llama a tu ruta /delete/id) -->
-        <a href="/delete/{{ u[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar?')">Eliminar</a>
+        <a href="/delete/{{ u[0] }}" class="btn btn-danger btn-sm" onclick= "return confirm('¿Seguro que deseas eliminar?')">Eliminar</a>
     </td>
 </tr>
     
