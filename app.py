@@ -1,3 +1,5 @@
+from sqlite3 import Cursor
+
 from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 
@@ -76,7 +78,7 @@ def buscar():
     if busqueda:
         sql="SELECT * FROM user WHERE name LIKE %s OR email LIKE %s"
         texto_busqueda = f"%{busqueda}%"
-        cursor.execute(sql, (texto_busqueda, texto_busqueda))
+        cur.execute(sql, (texto_busqueda, texto_busqueda))   
     #Si no escribio nada, mostramos todos los registros
     else:
         cur.execute("SELECT * FROM user")
