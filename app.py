@@ -64,6 +64,29 @@ def delete_user(id):
     cur.close()
     return redirect(url_for('index'))
      
+#FUNCION DE BUSCAR
+@app.route('/search',)
+def buscar():
+    #1 capturamos lo que el usuario ewscribe en el buscador     
+    busqueda=request.args.get('q','').strip() 
+    
+    #2 hacemos la conexion con la base de datos
+    cur=mysql.connection.cursor()
+    #3 si escribio algo buscamos coincidencias en nombre o correo 
+    if busqueda:
+        sql="SELECT * FROM user WHERE name LIKE %s OR email LIKE %s"
+        texto_busqueda = f"%{busqueda}%"
+        cursor.execute(sql, (texto_busqueda, texto_busqueda))
+    #Si no escribio nada, mostramos todos los registros
+    else:
+        cur.execute("SELECT * FROM user")
+    #4 recuperamos la informacion de la base de datos
+    usuarios=cur.fetchall()
+    cur.close() 
+    
+    #5 enviamos la informacion a la plantilla HTML para mostrarla
+    return render_template('index.html', user=usuarios, busqueda=busqueda)  
+        
      
 if __name__=='__main__':
     app.run(debug=True)
